@@ -1,7 +1,7 @@
 function Footer() {
   return (
     <footer>
-      <p>© 2026 Little Lemon</p>
+      <p>© 2026 Little Lemon Restaurant</p>
     </footer>
   );
 }
