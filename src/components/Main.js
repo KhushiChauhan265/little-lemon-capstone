@@ -1,11 +1,14 @@
+import { Routes, Route } from "react-router-dom";
+import Homepage from "./Homepage";
+import BookingPage from "./BookingPage";
+import Special from "./Special";
 function Main() {
   return (
     <main>
-      <h2>Reserve a Table</h2>
-      <p>
-        Welcome to Little Lemon Restaurant. Enjoy delicious food and a
-        wonderful dining experience.
-      </p>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/booking" element={<BookingPage />} />
+      </Routes>
     </main>
   );
 }
