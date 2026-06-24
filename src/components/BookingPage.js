@@ -6,15 +6,15 @@ function BookingPage({
   submitForm,
 }) {
   return (
-    <>
-      <h1>Reserve a Table</h1>
+    <section aria-labelledby="booking-heading">
+      <h1 id="booking-heading">Reserve a Table</h1>
 
       <BookingForm
         availableTimes={availableTimes}
         dispatch={dispatch}
         submitForm={submitForm}
       />
-    </>
+    </section>
   );
 }
 

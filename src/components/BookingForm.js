@@ -52,6 +52,7 @@ function BookingForm({
         gap: "20px",
       }}
       noValidate
+      aria-label="Table Booking Form"
     >
       <div style={{ display: "flex", flexDirection: "column" }}>
         <label htmlFor="res-date">
@@ -63,6 +64,8 @@ function BookingForm({
           required
           value={date}
           aria-label="Choose date"
+          aria-invalid={!isDateValid && isDateTouched}
+          aria-describedby={!isDateValid && isDateTouched ? "date-error" : undefined}
           onChange={(e) => {
             setDate(e.target.value);
             if (dispatch) {
@@ -73,7 +76,7 @@ function BookingForm({
           style={{ borderColor: !isDateValid && isDateTouched ? "red" : "initial" }}
         />
         {!isDateValid && isDateTouched && (
-          <span style={{ color: "red", fontSize: "12px" }}>
+          <span id="date-error" role="alert" style={{ color: "red", fontSize: "12px" }}>
             Please select a valid date.
           </span>
         )}
@@ -88,6 +91,8 @@ function BookingForm({
           required
           value={time}
           aria-label="Choose time"
+          aria-invalid={!isTimeValid}
+          aria-describedby={!isTimeValid ? "time-error" : undefined}
           onChange={(e) =>
             setTime(e.target.value)
           }
@@ -103,7 +108,7 @@ function BookingForm({
             ))}
         </select>
         {!isTimeValid && (
-          <span style={{ color: "red", fontSize: "12px" }}>
+          <span id="time-error" role="alert" style={{ color: "red", fontSize: "12px" }}>
             Please select a valid time.
           </span>
         )}
@@ -120,6 +125,8 @@ function BookingForm({
           max="10"
           required
           aria-label="Number of guests"
+          aria-invalid={!isGuestsValid && isGuestsTouched}
+          aria-describedby={!isGuestsValid && isGuestsTouched ? "guests-error" : undefined}
           value={guests}
           onChange={(e) =>
             setGuests(Number(e.target.value))
@@ -128,7 +135,7 @@ function BookingForm({
           style={{ borderColor: !isGuestsValid && isGuestsTouched ? "red" : "initial" }}
         />
         {!isGuestsValid && isGuestsTouched && (
-          <span style={{ color: "red", fontSize: "12px" }}>
+          <span id="guests-error" role="alert" style={{ color: "red", fontSize: "12px" }}>
             Please enter a number between 1 and 10.
           </span>
         )}
@@ -142,6 +149,8 @@ function BookingForm({
           id="occasion"
           required
           aria-label="Occasion"
+          aria-invalid={!isOccasionValid}
+          aria-describedby={!isOccasionValid ? "occasion-error" : undefined}
           value={occasion}
           onChange={(e) =>
             setOccasion(e.target.value)
@@ -151,7 +160,7 @@ function BookingForm({
           <option>Anniversary</option>
         </select>
         {!isOccasionValid && (
-          <span style={{ color: "red", fontSize: "12px" }}>
+          <span id="occasion-error" role="alert" style={{ color: "red", fontSize: "12px" }}>
             Please select a valid occasion.
           </span>
         )}
@@ -160,7 +169,7 @@ function BookingForm({
       <button
         type="submit"
         disabled={!isFormValid}
-        aria-label="On Click"
+        aria-label="Make Your Reservation"
       >
         Make Your Reservation
       </button>
