@@ -7,23 +7,15 @@ import Main from "./components/Main";
 import Footer from "./components/Footer";
 
 export function initializeTimes() {
-  return [
-    "17:00",
-    "18:00",
-    "19:00",
-    "20:00",
-    "21:00",
-  ];
+  return window.fetchAPI
+    ? window.fetchAPI(new Date())
+    : ["17:00", "18:00", "19:00", "20:00", "21:00"];
 }
 
 export function updateTimes(state, date) {
-  return [
-    "17:00",
-    "18:00",
-    "19:00",
-    "20:00",
-    "21:00",
-  ];
+  return window.fetchAPI
+    ? window.fetchAPI(new Date(date))
+    : state;
 }
 
 function App() {

@@ -1,14 +1,27 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 import Homepage from "./Homepage";
 import BookingPage from "./BookingPage";
 import ConfirmedBooking from "./ConfirmedBooking";
 
 function Main({ availableTimes, dispatch }) {
+  const navigate = useNavigate();
+
+  const submitForm = (formData) => {
+    const success = window.submitAPI
+      ? window.submitAPI(formData)
+      : true;
+
+    if (success) {
+      navigate("/confirmed");
+    }
+
+    return success;
+  };
+
   return (
     <main>
       <Routes>
-
         <Route
           path="/"
           element={<Homepage />}
@@ -20,6 +33,7 @@ function Main({ availableTimes, dispatch }) {
             <BookingPage
               availableTimes={availableTimes}
               dispatch={dispatch}
+              submitForm={submitForm}
             />
           }
         />
@@ -28,7 +42,6 @@ function Main({ availableTimes, dispatch }) {
           path="/confirmed"
           element={<ConfirmedBooking />}
         />
-
       </Routes>
     </main>
   );

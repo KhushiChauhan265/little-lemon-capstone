@@ -1,9 +1,13 @@
 function ConfirmedBooking() {
   return (
-    <div>
+    <main>
       <h1>Booking Confirmed!</h1>
-      <p>Your reservation has been successfully submitted.</p>
-    </div>
+
+      <p>
+        Your reservation has been
+        successfully submitted.
+      </p>
+    </main>
   );
 }
 
