@@ -10,11 +10,9 @@ function BookingForm({
   const [guests, setGuests] = useState(1);
   const [occasion, setOccasion] = useState("Birthday");
 
-  // Touched states for validation feedback
   const [isDateTouched, setIsDateTouched] = useState(false);
   const [isGuestsTouched, setIsGuestsTouched] = useState(false);
 
-  // Validation logic
   const isDateValid = date !== "";
   const isGuestsValid = guests >= 1 && guests <= 10;
   const isTimeValid = time !== "";
@@ -28,7 +26,6 @@ function BookingForm({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (!isFormValid) return;
 
     const formData = {
@@ -46,15 +43,10 @@ function BookingForm({
   return (
     <form
       onSubmit={handleSubmit}
-      style={{
-        display: "grid",
-        maxWidth: "300px",
-        gap: "20px",
-      }}
       noValidate
       aria-label="Table Booking Form"
     >
-      <div style={{ display: "flex", flexDirection: "column" }}>
+      <div className="form-field">
         <label htmlFor="res-date">
           Choose date
         </label>
@@ -73,16 +65,16 @@ function BookingForm({
             }
           }}
           onBlur={() => setIsDateTouched(true)}
-          style={{ borderColor: !isDateValid && isDateTouched ? "red" : "initial" }}
+          style={{ borderColor: !isDateValid && isDateTouched ? "#e74c3c" : "" }}
         />
         {!isDateValid && isDateTouched && (
-          <span id="date-error" role="alert" style={{ color: "red", fontSize: "12px" }}>
+          <span id="date-error" className="error-message" role="alert">
             Please select a valid date.
           </span>
         )}
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column" }}>
+      <div className="form-field">
         <label htmlFor="res-time">
           Choose time
         </label>
@@ -93,34 +85,29 @@ function BookingForm({
           aria-label="Choose time"
           aria-invalid={!isTimeValid}
           aria-describedby={!isTimeValid ? "time-error" : undefined}
-          onChange={(e) =>
-            setTime(e.target.value)
-          }
+          onChange={(e) => setTime(e.target.value)}
         >
           {availableTimes &&
             availableTimes.map((availableTime) => (
-              <option
-                key={availableTime}
-                value={availableTime}
-              >
+              <option key={availableTime} value={availableTime}>
                 {availableTime}
               </option>
             ))}
         </select>
         {!isTimeValid && (
-          <span id="time-error" role="alert" style={{ color: "red", fontSize: "12px" }}>
+          <span id="time-error" className="error-message" role="alert">
             Please select a valid time.
           </span>
         )}
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <label htmlFor="guests">
+      <div className="form-field">
+        <label htmlFor="res-guests">
           Number of guests
         </label>
         <input
           type="number"
-          id="guests"
+          id="res-guests"
           min="1"
           max="10"
           required
@@ -128,39 +115,35 @@ function BookingForm({
           aria-invalid={!isGuestsValid && isGuestsTouched}
           aria-describedby={!isGuestsValid && isGuestsTouched ? "guests-error" : undefined}
           value={guests}
-          onChange={(e) =>
-            setGuests(Number(e.target.value))
-          }
+          onChange={(e) => setGuests(Number(e.target.value))}
           onBlur={() => setIsGuestsTouched(true)}
-          style={{ borderColor: !isGuestsValid && isGuestsTouched ? "red" : "initial" }}
+          style={{ borderColor: !isGuestsValid && isGuestsTouched ? "#e74c3c" : "" }}
         />
         {!isGuestsValid && isGuestsTouched && (
-          <span id="guests-error" role="alert" style={{ color: "red", fontSize: "12px" }}>
+          <span id="guests-error" className="error-message" role="alert">
             Please enter a number between 1 and 10.
           </span>
         )}
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <label htmlFor="occasion">
+      <div className="form-field">
+        <label htmlFor="res-occasion">
           Occasion
         </label>
         <select
-          id="occasion"
+          id="res-occasion"
           required
           aria-label="Occasion"
           aria-invalid={!isOccasionValid}
           aria-describedby={!isOccasionValid ? "occasion-error" : undefined}
           value={occasion}
-          onChange={(e) =>
-            setOccasion(e.target.value)
-          }
+          onChange={(e) => setOccasion(e.target.value)}
         >
           <option>Birthday</option>
           <option>Anniversary</option>
         </select>
         {!isOccasionValid && (
-          <span id="occasion-error" role="alert" style={{ color: "red", fontSize: "12px" }}>
+          <span id="occasion-error" className="error-message" role="alert">
             Please select a valid occasion.
           </span>
         )}
